@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = []
+    @presenters = []
     Post.all.each_with_index do |post, index|
-      @posts << PostPresenter.new(post, index == 0)
+      @presenters << PostPresenter.new(post, index == 0)
     end
-    @posts
+    @presenters
   end
 
 end

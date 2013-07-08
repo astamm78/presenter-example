@@ -2,15 +2,15 @@ class PostPresenter
 
   include ActionView::Helpers::DateHelper
 
-  attr_reader :post, :index
+  attr_reader :post, :featured
 
-  def initialize(post, index)
+  def initialize(post, true_false)
     @post = post
-    @index = index
+    @featured = true_false
   end
 
-  def featured
-    "featured" if index == true
+  def featured_post?
+    " featured" if featured
   end
 
   def header
@@ -22,11 +22,11 @@ class PostPresenter
   end
 
   def image
-    index == true ? post.images[:large] : post.images[:small]
+    featured ? post.images[:large] : post.images[:small]
   end
 
   def description
-    index == true ? post.description.truncate(160) : post.description.truncate(90)
+    featured ? post.description.truncate(160) : post.description.truncate(90)
   end
 
   def comment_count
@@ -35,7 +35,7 @@ class PostPresenter
 
   def related_posts
     post.related_posts.map do |post|
-      {:title => post.title, :url => post.url, :source => post.source}
+      "<a href='#{post.url}'>#{post.title}</a> - #{post.source}"
     end
   end
 

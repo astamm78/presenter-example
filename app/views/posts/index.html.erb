@@ -1,18 +1,17 @@
 <h1>Top Posts</h1>
 <div class="posts">
 
-  <% @posts.each do |post, index| %>
-    <div class="post <%= post.featured %>">
-      <h3><%= post.header %></h3>
-      <p><%= post.published %></p>
-      <%= image_tag post.image %>
-      <p><%= post.description %></p>
-      <p><%= post.comment_count %></p>
-
+  <% @presenters.each do |presenter| %>
+    <div class="post<%= presenter.featured_post? %>">
+      <h3><%= presenter.header %></h3>
+      <p><%= presenter.published %></p>
+      <%= image_tag presenter.image %>
+      <p><%= presenter.description %></p>
+      <p><%= presenter.comment_count %></p>
       <p>Related Stories</p>
       <ul>
-        <% post.related_posts.each do |post| %>
-          <li><%= link_to post[:title], post[:url] %> - <%= post[:source] %></li>
+        <% presenter.related_posts.each do |link| %>
+          <li><%= link.html_safe %></li>
         <% end %>
       </ul>
     </div>
