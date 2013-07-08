@@ -1,0 +1,13 @@
+<div class="post{{featured_post?}}">
+  <h3>{{header}}</h3>
+  <p>{{published}}</p>
+  <img src='{{image_file}}'/>
+  <p>{{description}}</p>
+  <p>{{comment_count}}</p>
+  <p>Related Stories</p>
+  <ul>
+    {{#related_posts}}
+      <li>{{.}}</li>
+    {{/related_posts}}
+  </ul>
+</div>

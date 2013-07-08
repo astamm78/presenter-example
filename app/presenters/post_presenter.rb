@@ -1,6 +1,8 @@
-class PostPresenter
+class PostPresenter < Mustache
 
   include ActionView::Helpers::DateHelper
+
+  self.template_file = File.new(File.join(Rails.root, "app/views/posts/_post.html.mustache"))
 
   attr_reader :post, :featured
 
@@ -21,7 +23,7 @@ class PostPresenter
     "Published #{ time_ago_in_words(post.posted_at) } ago."
   end
 
-  def image
+  def image_file
     featured ? post.images[:large] : post.images[:small]
   end
 
