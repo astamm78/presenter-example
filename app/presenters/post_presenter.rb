@@ -2,7 +2,7 @@ class PostPresenter < Mustache
 
   include ActionView::Helpers::DateHelper
 
-  self.template_file = File.new(File.join(Rails.root, "app/views/posts/_post.html.mustache"))
+  self.template_file = File.join(Rails.root, "app/views/posts/_post.html.mustache")
 
   attr_reader :post, :featured
 
@@ -37,7 +37,7 @@ class PostPresenter < Mustache
 
   def related_posts
     post.related_posts.map do |post|
-      "<a href='#{post.url}'>#{post.title}</a> - #{post.source}"
+      {title: post.title, url: post.url, source: post.source}
     end
   end
 
