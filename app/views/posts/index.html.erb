@@ -1,23 +1,21 @@
 <h1>Top Posts</h1>
 <div class="posts">
-  <% @posts.each_with_index do |post, index| %>
-    <div class="post <%="featured" if index == 0%>">
-      <h3><%=post.title%> - <%=post.source%></h3>
-      <p>published <%= time_ago_in_words(post.posted_at)%> ago</p>
-      <% if index == 0 %>
-        <%= image_tag post.images[:large] %>
-        <p><%= post.description.truncate(160) %></p>
-      <% else %>
-        <%= image_tag post.images[:small] %>
-        <p><%= post.description.truncate(90) %></p>
-      <% end %>
-      <p><%= post.comments.length %> comments</p>
+
+  <% @posts.each do |post, index| %>
+    <div class="post <%= post.featured %>">
+      <h3><%= post.header %></h3>
+      <p><%= post.published %></p>
+      <%= image_tag post.image %>
+      <p><%= post.description %></p>
+      <p><%= post.comment_count %></p>
+
       <p>Related Stories</p>
       <ul>
         <% post.related_posts.each do |post| %>
-          <li><%= link_to post.title, post.url %> - <%= post.source %></li>
+          <li><%= link_to post[:title], post[:url] %> - <%= post[:source] %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+
 </div>
